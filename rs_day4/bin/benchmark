@@ -15,6 +15,7 @@ Benchmark.ips do |x|
   x.report("Ruby") { CDay4.run input }
   x.report("C") { CDay4.c_run input }
   x.report("Rust Single") { RsDay4.run input }
+  x.report("Rust Exception") { RsDay4.try_run input }
   x.report("Rust Parallel") { RsDay4.run_parallel input }
   x.compare!
 end
@@ -23,5 +24,6 @@ Benchmark.bmbm do |x|
   x.report("Ruby") { CDay4.run input }
   x.report("C") { CDay4.c_run input }
   x.report("Rust Single") { RsDay4.run input }
+  x.report("Rust Exception") { RsDay4.try_run input }
   x.report("Rust Parallel") { RsDay4.run_parallel input }
 end

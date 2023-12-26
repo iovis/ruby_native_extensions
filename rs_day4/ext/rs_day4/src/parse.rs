@@ -7,10 +7,13 @@ use nom::sequence::separated_pair;
 use nom::IResult;
 
 pub fn line(input: &str) -> (RangeInclusive<i32>, RangeInclusive<i32>) {
-    let (_, ranges) = separated_pair(parse_range, tag(","), parse_range)(input)
-        .expect("Ranges should be parseable");
+    let (_, ranges) = try_line(input).expect("Ranges should be parseable");
 
     ranges
+}
+
+pub fn try_line(input: &str) -> IResult<&str, (RangeInclusive<i32>, RangeInclusive<i32>)> {
+    separated_pair(parse_range, tag(","), parse_range)(input)
 }
 
 fn parse_range(input: &str) -> IResult<&str, RangeInclusive<i32>> {
