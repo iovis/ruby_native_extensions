@@ -21,6 +21,5 @@ end
 
 task default: %i[clobber compile spec]
 task benchmark: %i[clobber compile] do
-  p "--------"
   sh "bin/benchmark"
 end

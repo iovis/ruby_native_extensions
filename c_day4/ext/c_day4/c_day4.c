@@ -1,7 +1,5 @@
 #include "c_day4.h"
 
-#include <stdio.h>
-
 typedef struct Range {
   int start;
   int end;
@@ -10,8 +8,34 @@ typedef struct Range {
 void range_print(Range range) { printf("%d..=%d\n", range.start, range.end); }
 
 void ranges_parse(const char* line, Range ranges[static 2]) {
-  sscanf(line, "%d-%d,%d-%d", &ranges[0].start, &ranges[0].end,
-         &ranges[1].start, &ranges[1].end);
+  // NOTE: apparently `sscanf` is very slow
+  // sscanf(line, "%d-%d,%d-%d", &ranges[0].start, &ranges[0].end,
+  //        &ranges[1].start, &ranges[1].end);
+  int i = 0;
+  int digit = 0;
+  int start = 0;
+  int end = 0;
+
+  while (*line != '\0') {
+    while (*line >= '0' && *line <= '9') {
+      digit = digit * 10 + (*line - '0');
+      line++;
+    }
+
+    if (*line == '-') {
+      start = digit;
+    } else if (*line == ',' || *line == '\n') {
+      end = digit;
+
+      ranges[i++] = (Range){
+          .start = start,
+          .end = end,
+      };
+    }
+
+    digit = 0;
+    line++;
+  }
 }
 
 bool range_full_overlap(Range self, Range other) {
@@ -27,14 +51,16 @@ long p1(size_t n, const char input[static n]) {
   size_t li = 0;
 
   for (size_t i = 0; i < n; i++) {
-    line[li] = input[i];
-    li++;
+    line[li++] = input[i];
 
     if (input[i] == '\n') {
       line[li] = '\0';
       li = 0;
 
+      // printf("%s", line);
       ranges_parse(line, ranges);
+      // range_print(ranges[0]);
+      // range_print(ranges[1]);
 
       if (range_full_overlap(ranges[0], ranges[1])) {
         count++;
@@ -48,6 +74,7 @@ long p1(size_t n, const char input[static n]) {
 VALUE run(VALUE self, VALUE input) {
   size_t length = RSTRING_LEN(input);
   char* cstr_input = StringValuePtr(input);
+
   long solution = p1(length, cstr_input);
 
   return LONG2FIX(solution);
