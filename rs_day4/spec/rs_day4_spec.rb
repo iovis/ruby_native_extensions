@@ -12,8 +12,14 @@ RSpec.describe RsDay4 do
     INPUT
   end
 
-  context "Rust" do
+  context "single threaded" do
     subject { described_class.run(input) }
+
+    it { is_expected.to eq 2 }
+  end
+
+  context "parallel" do
+    subject { described_class.run_parallel(input) }
 
     it { is_expected.to eq 2 }
   end

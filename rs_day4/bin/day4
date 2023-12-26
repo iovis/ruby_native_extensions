@@ -9,4 +9,5 @@ require "benchmark"
 input = File.read "#{__dir__}/../../input.txt"
 puts CDay4.run input
 puts CDay4.c_run input
-puts RsDay4.rs_run input
+puts RsDay4.run input
+puts RsDay4.run_parallel input
