@@ -1,4 +1,9 @@
 PATH
+  remote: ../c_day4
+  specs:
+    c_day4 (0.1.0)
+
+PATH
   remote: .
   specs:
     rs_day4 (0.1.0)
@@ -91,6 +96,7 @@ PLATFORMS
 
 DEPENDENCIES
   benchmark-ips
+  c_day4!
   rake (~> 13.0)
   rake-compiler
   rb_sys (~> 0.9.63)

@@ -3,8 +3,10 @@
 
 require "bundler/setup"
 require "rs_day4"
+require "c_day4"
 require "benchmark"
 
 input = File.read "#{__dir__}/../../input.txt"
-puts RsDay4.run input
+puts CDay4.run input
+puts CDay4.c_run input
 puts RsDay4.rs_run input

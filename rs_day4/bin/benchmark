@@ -3,6 +3,7 @@
 
 require "bundler/setup"
 require "rs_day4"
+require "c_day4"
 require "benchmark"
 require "benchmark/ips"
 
@@ -11,12 +12,14 @@ input = File.read "#{__dir__}/../../input.txt"
 # RubyVM::YJIT.enable
 
 Benchmark.ips do |x|
-  x.report("Ruby") { RsDay4.run input }
-  x.report("Rust") { RsDay4.rs_run input }
+  x.report("Ruby") { CDay4.run input }
+  x.report("C") { CDay4.c_run input }
+  x.report("Rust") { RsDay4.run input }
   x.compare!
 end
 
 Benchmark.bmbm do |x|
-  x.report("Ruby") { RsDay4.run input }
-  x.report("Rust") { RsDay4.rs_run input }
+  x.report("Ruby") { CDay4.run input }
+  x.report("C") { CDay4.c_run input }
+  x.report("Rust") { RsDay4.run input }
 end

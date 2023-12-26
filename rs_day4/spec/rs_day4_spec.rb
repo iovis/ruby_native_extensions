@@ -12,14 +12,8 @@ RSpec.describe RsDay4 do
     INPUT
   end
 
-  context "ruby" do
-    subject { described_class.run(input) }
-
-    it { is_expected.to eq 2 }
-  end
-
   context "Rust" do
-    subject { described_class.rs_run(input) }
+    subject { described_class.run(input) }
 
     it { is_expected.to eq 2 }
   end
