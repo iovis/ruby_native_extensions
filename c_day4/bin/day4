@@ -1,0 +1,10 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+require "bundler/setup"
+require "c_day4"
+require "benchmark"
+
+input = File.read "#{__dir__}/../../input.txt"
+puts(Benchmark.realtime { CDay4.run input })
+puts(Benchmark.realtime { CDay4.c_run input })

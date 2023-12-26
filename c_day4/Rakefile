@@ -1,0 +1,26 @@
+# frozen_string_literal: true
+
+require "bundler/gem_tasks"
+require "rspec/core/rake_task"
+
+RSpec::Core::RakeTask.new(:spec)
+
+require "rubocop/rake_task"
+
+RuboCop::RakeTask.new
+
+require "rake/extensiontask"
+
+task build: :compile
+
+GEMSPEC = Gem::Specification.load("c_day4.gemspec")
+
+Rake::ExtensionTask.new("c_day4", GEMSPEC) do |ext|
+  ext.lib_dir = "lib/c_day4"
+end
+
+task default: %i[clobber compile spec]
+task benchmark: %i[clobber compile] do
+  p "--------"
+  sh "bin/benchmark"
+end

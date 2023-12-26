@@ -1,0 +1,22 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+require "bundler/setup"
+require "c_day4"
+require "benchmark"
+require "benchmark/ips"
+
+input = File.read "#{__dir__}/../../input.txt"
+
+# RubyVM::YJIT.enable
+
+Benchmark.ips do |x|
+  x.report("Ruby") { CDay4.run input }
+  x.report("C") { CDay4.c_run input }
+  x.compare!
+end
+
+Benchmark.bmbm do |x|
+  x.report("Ruby") { CDay4.run input }
+  x.report("C") { CDay4.c_run input }
+end
