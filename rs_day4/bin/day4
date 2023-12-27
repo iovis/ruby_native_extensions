@@ -11,3 +11,4 @@ puts CDay4.run input
 puts CDay4.c_run input
 puts RsDay4.run input
 puts RsDay4.run_parallel input
+puts RsDay4.run_parallel! input
