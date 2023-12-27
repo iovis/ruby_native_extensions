@@ -72,6 +72,8 @@ long p1(size_t n, const char input[static n]) {
 }
 
 VALUE run(VALUE self, VALUE input) {
+  Check_Type(input, T_STRING);
+
   size_t length = RSTRING_LEN(input);
   char* cstr_input = StringValuePtr(input);
 
