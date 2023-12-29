@@ -1,51 +1,6 @@
 #include "c_day4.h"
 
-typedef struct Range {
-  int start;
-  int end;
-} Range;
-
-void range_print(Range range) { printf("%d..=%d\n", range.start, range.end); }
-
-void ranges_parse_slow(const char* line, Range ranges[static 2]) {
-  sscanf(line, "%d-%d,%d-%d", &ranges[0].start, &ranges[0].end,
-         &ranges[1].start, &ranges[1].end);
-}
-
-void ranges_parse(const char* line, Range ranges[static 2]) {
-  int i = 0;
-  int digit = 0;
-  int start = 0;
-  int end = 0;
-
-  while (*line != '\0') {
-    while (*line >= '0' && *line <= '9') {
-      digit = digit * 10 + (*line - '0');
-      line++;
-    }
-
-    if (*line == '-') {
-      start = digit;
-    } else if (*line == ',' || *line == '\n') {
-      end = digit;
-
-      ranges[i++] = (Range){
-          .start = start,
-          .end = end,
-      };
-    }
-
-    digit = 0;
-    line++;
-  }
-}
-
-bool range_full_overlap(Range self, Range other) {
-  return (self.start <= other.start && self.end >= other.end) ||
-         (other.start <= self.start && other.end >= self.end);
-}
-
-long p1_slow(size_t n, const char input[static n]) {
+static long p1_slow(size_t n, const char input[static n]) {
   long count = 0;
   Range ranges[2] = {0};
 
@@ -70,7 +25,7 @@ long p1_slow(size_t n, const char input[static n]) {
   return count;
 }
 
-VALUE run_slow(VALUE self, VALUE input) {
+static VALUE run_slow(VALUE self, VALUE input) {
   Check_Type(input, T_STRING);
 
   size_t length = RSTRING_LEN(input);
@@ -81,7 +36,7 @@ VALUE run_slow(VALUE self, VALUE input) {
   return LONG2FIX(solution);
 }
 
-long p1(size_t n, const char input[static n]) {
+static long p1(size_t n, const char input[static n]) {
   long count = 0;
   Range ranges[2] = {0};
 
@@ -109,11 +64,11 @@ long p1(size_t n, const char input[static n]) {
   return count;
 }
 
-VALUE run(VALUE self, VALUE input) {
+static VALUE run(VALUE self, VALUE input) {
   Check_Type(input, T_STRING);
 
   size_t length = RSTRING_LEN(input);
-  char* cstr_input = StringValuePtr(input);
+  char* cstr_input = RSTRING_PTR(input);
 
   long solution = p1(length, cstr_input);
 
