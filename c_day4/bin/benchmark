@@ -12,11 +12,13 @@ input = File.read "#{__dir__}/../../input.txt"
 
 Benchmark.ips do |x|
   x.report("Ruby") { CDay4.run input }
+  x.report("C sscanf") { CDay4.c_run_slow input }
   x.report("C") { CDay4.c_run input }
   x.compare!
 end
 
 Benchmark.bmbm do |x|
   x.report("Ruby") { CDay4.run input }
+  x.report("C sscanf") { CDay4.c_run_slow input }
   x.report("C") { CDay4.c_run input }
 end
