@@ -6,6 +6,7 @@ require "rs_day4"
 require "c_day4"
 require "benchmark"
 require "benchmark/ips"
+require "memory_profiler"
 
 input = File.read "#{__dir__}/../../input.txt"
 
@@ -31,3 +32,14 @@ Benchmark.bmbm do |x|
   x.report("Rust Parallel") { RsDay4.run_parallel input }
   x.report("Rust Parallel Unsafe") { RsDay4.run_parallel! input }
 end
+
+puts "\nMemory Profile ---------------------------------------------------"
+
+report = MemoryProfiler.report { CDay4.run input }
+puts "Ruby: #{report.total_allocated_memsize} bytes (#{report.total_allocated} objects)"
+
+report = MemoryProfiler.report { CDay4.c_run input }
+puts "C: #{report.total_allocated_memsize} bytes (#{report.total_allocated} objects)"
+
+report = MemoryProfiler.report { RsDay4.run input }
+puts "Rust: #{report.total_allocated_memsize} bytes (#{report.total_allocated} objects)"

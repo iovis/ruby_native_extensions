@@ -10,5 +10,5 @@ require "c_day4"
 
 @input = File.read "#{__dir__}/../../input.txt"
 
-require "irb"
-IRB.start(__FILE__)
+require "pry"
+Pry.start
