@@ -1,0 +1,14 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+require "bundler/setup"
+require "rs_day4"
+require "c_day4"
+
+# You can add fixtures and/or initialization code here to make experimenting
+# with your gem easier. You can also use a different console, if you like.
+
+@input = File.read "#{__dir__}/../../input.txt"
+
+require "pry"
+Pry.start
