@@ -1,0 +1,15 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+require "bundler/setup"
+require "rs_hello"
+require "c_hello"
+require "benchmark"
+require "benchmark/ips"
+
+Benchmark.ips do |x|
+  x.report("Ruby") { RsHello.rb_fib 20 }
+  x.report("C") { CHello.fib 20 }
+  x.report("Rust") { RsHello.fib 20 }
+  x.compare!
+end

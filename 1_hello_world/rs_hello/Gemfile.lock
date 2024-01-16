@@ -1,4 +1,9 @@
 PATH
+  remote: ../c_hello
+  specs:
+    c_hello (0.1.0)
+
+PATH
   remote: .
   specs:
     rs_hello (0.1.0)
@@ -7,6 +12,7 @@ GEM
   remote: https://rubygems.org/
   specs:
     ast (2.4.2)
+    benchmark-ips (2.13.0)
     diff-lcs (1.5.0)
     json (2.7.1)
     language_server-protocol (3.17.0.3)
@@ -55,6 +61,8 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  benchmark-ips
+  c_hello!
   rake (~> 13.0)
   rake-compiler
   rb_sys (~> 0.9.63)

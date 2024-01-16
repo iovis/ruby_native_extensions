@@ -12,4 +12,12 @@ RSpec.describe RsHello do
   it "can get excited" do
     expect(described_class.hello!("dabidu")).to eq "HELLO, DABIDU!"
   end
+
+  context "fib" do
+    it { expect(described_class.fib(5)).to eq 5 }
+    it { expect(described_class.fib(7)).to eq 13 }
+
+    it { expect(described_class.rb_fib(5)).to eq 5 }
+    it { expect(described_class.rb_fib(7)).to eq 13 }
+  end
 end
