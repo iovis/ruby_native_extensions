@@ -16,6 +16,8 @@ end
 module CDay4
   using RangeExt
 
+  # @param input [String]
+  # @return [Integer]
   def self.run(input)
     input
       .lines
