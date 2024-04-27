@@ -10,8 +10,6 @@ require "memory_profiler"
 
 input = File.read "#{__dir__}/../../input.txt"
 
-# RubyVM::YJIT.enable
-
 Benchmark.ips do |x|
   x.report("Ruby") { CDay4.run input }
   x.report("C") { CDay4.c_run input }
@@ -32,6 +30,8 @@ Benchmark.bmbm do |x|
   x.report("Rust Parallel") { RsDay4.run_parallel input }
   x.report("Rust Parallel Unsafe") { RsDay4.run_parallel! input }
 end
+
+return unless ENV["MEMORY_PROFILE"]
 
 puts "\nMemory Profile ---------------------------------------------------"
 
